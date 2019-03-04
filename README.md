@@ -1,2 +1,2 @@
 # vuePress
-vu静态博客
+vu静态文档
