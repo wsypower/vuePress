@@ -1,0 +1,27 @@
+{
+  "name": "vuepress",
+  "version": "1.0.0",
+  "description": "vu静态文档",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wsypower/vuePress.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wsypower/vuePress/issues"
+  },
+  "homepage": "https://github.com/wsypower/vuePress#readme",
+  "devDependencies": {
+    "vuepress": "^0.14.10"
+  }
+}
