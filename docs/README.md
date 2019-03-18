@@ -1,15 +1,15 @@
 ---
 home: true
-heroImage: /download.png
-actionText: 快速开始
-actionLink: /zh/guide/
+heroImage: /indexBc.png
+actionText: 快速阅读
+actionLink: /guide/base/test1
 features:
-- title: 简洁至上
-  details: 以 Markdown 为中心的项目结构，以最少的配置帮助你专注于写作。
-- title: Vue驱动
-  details: 享受 Vue + webpack 的开发体验，在 Markdown 中使用 Vue 组件，同时可以使用 Vue 来开发自定义主题。
-- title: 高性能
-  details: VuePress 为每个页面预渲染生成静态的 HTML，同时在页面被加载的时候，将作为 SPA 运行。
+- title: 项目工程API
+  details: 以 Markdown 书写的项目后端API以及返回JSON，帮助快速调用。
+- title: Vue组件
+  details:  Vue + webpack 的项目组件，分离业务-组件-布局-样式，方便快速完成。
+- title: 分享
+  details: 实际工作中遇到的问题总结分享。
 footer: 人心生一念，天地悉皆知
 ---
 
