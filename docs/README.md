@@ -2,7 +2,7 @@
 home: true
 heroImage: /indexBc.png
 actionText: 快速阅读
-actionLink: /guide/base/test1
+actionLink: /30seconds/base/Array
 features:
 - title: 项目工程API
   details: 以 Markdown 书写的项目后端API以及返回JSON，帮助快速调用。

@@ -1,7 +1,7 @@
 module.exports = {
     base: '/',
-    title: '天翼智慧城市-城管事业部',
-    description: `智慧城管事业部文档`,
+    title: '学习记录文档',
+    description: `魏亚飞个人文档`,
     head: [
         ['link', {rel: 'icon', href: `/ico/favicon.ico`}]
     ],
@@ -26,7 +26,12 @@ module.exports = {
         per_page: 6,
         date_format: 'yyyy-MM-dd HH:mm:ss',
         nav: [
-            {text: '指南', link: '/guide/base/test1'},
+            {
+                text: 'JavaScript',
+                items: [
+                    {text: '30seconds', link: '/30seconds/base/Array'},
+                ]
+            },
             {text: '项目工程API', link: '/Vue/'},
             {
                 text: 'Vue',
@@ -65,14 +70,13 @@ module.exports = {
             },
         ],
         sidebar: {
-            '/guide/': [
+            '/30seconds/': [
                 {
-                    title: '案例样式文件',
+                    title: '30seconds of ES6',
                     collapsable: false,
                     children: [
-                        'base/test1',
-                        'base/test2',
-                        'base/test3',
+                        'base/Array',
+                        'base/Function',
                     ]
                 },
             ],
