@@ -268,8 +268,8 @@ bifurcate(['beep', 'boop', 'foo', 'bar'], [true, true, false, true]); // [ ['bee
 
 ## bifurcateBy
 ::: tip bifurcateBy
-   将值分成两组。如果filter中的元素为true，则集合中对应的元素属于第一组;否则，它属于第二组。
-   使用Array.prototype.reduce()和Array.prototype.push()根据filter向组添加元素。
+根据谓词函数将值分成两组，谓词函数指定输入集合中的元素属于哪一组。如果谓词函数返回一个真值，则集合元素属于第一组;否则，它属于第二组。
+使用Array.prototype.reduce()和Array.prototype.push()根据fn为每个元素返回的值向组添加元素。
 :::
 
 ``` js
