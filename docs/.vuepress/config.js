@@ -30,42 +30,17 @@ module.exports = {
                 text: 'JavaScript',
                 items: [
                     {text: '30seconds', link: '/30seconds/base/Array'},
+                    {text: 'JavaScript常用函数（ES6）', link: '/es6/fun/fun'},
                 ]
             },
-            {text: '项目工程API', link: '/Vue/'},
-            {
-                text: 'Vue',
-                items: [
-                    {text: '学习笔记', link: '/blog/'},
-                    {text: '项目组件', link: '/language/chinese'},
-                    {text: 'TUI组件', link: '/language/japanese'},
-                    {text: '项目框架', link: '/language/chinese'},
-                    {text: '组件封装笔记', link: '/language/chinese'},
-                    {text: '源代码分析', link: '/language/chinese'},
-                    {text: 'webpack4笔记', link: '/language/chinese'},
-                    {text: 'Vuepress笔记', link: '/language/chinese'},
-                ]
-            },
+            {text: 'Leetcode', link: '/Leetcode/javascript/leetcode'},
+            {text: 'Vue全家桶', link: '/Vue/'},
+            {text: 'React全家桶', link: '/react/study/react'},
             {
                 text: '分享',
                 items: [
                     {text: 'JS读书总结(红宝书犀牛书)', link: '/language/chinese'},
                     {text: '项目JS常用函数', link: '/language/japanese'}
-                ]
-            },
-            {
-                text: '后端',
-                items: [
-                    {text: 'JS读书总结(红宝书犀牛书)', link: '/language/chinese'},
-                    {text: '项目JS常用函数', link: '/language/japanese'}
-                ]
-            },
-            {
-                text: '前端',
-                items: [
-                    {text: 'css', link: '/language/chinese'},
-                    {text: 'scss', link: '/language/japanese'},
-                    {text: 'TypeScript', link: '/language/japanese'},
                 ]
             },
         ],
@@ -80,10 +55,37 @@ module.exports = {
                     ]
                 },
             ],
+            '/es6/': [
+                {
+                    title: 'JavaScript常用函数（ES6）',
+                    collapsable: false,
+                    children: [
+                        'fun/fun',
+                    ]
+                },
+            ],
+            '/Leetcode/': [
+                {
+                    title: 'Leetcode',
+                    collapsable: false,
+                    children: [
+                        'javascript/leetcode',
+                    ]
+                },
+            ],
             '/Vue/': [
                 {
                     title: '项目工程文件',
                     collapsable: false,
+                },
+            ],
+            '/react/': [
+                {
+                    title: 'React学习',
+                    collapsable: false,
+                    children: [
+                        'study/react',
+                    ]
                 },
             ]
         },
