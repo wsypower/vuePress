@@ -422,3 +422,19 @@ const deepFlatten = arr => [].concat(...arr.map(v => (Array.isArray(v) ? deepFla
 EXAMPLES
 deepFlatten([1, [2], [[3], 4], 5]); // [1,2,3,4,5]
 ```
+## difference
+::: tip  数组比较
+  返回两个数组之间的差异。
+  
+  根据数组 b 创建一个 Set 对象，然后在数组 a 上使用 Array.filter() 方法，过滤出数组 b 中不包含的值。
+:::
+
+``` js
+const difference = (a, b) => {
+  const s = new Set(b);
+  return a.filter(x => !s.has(x));
+};
+EXAMPLES
+
+difference([1, 2, 3], [1, 2, 4]); // [3]
+```
