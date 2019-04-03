@@ -35,3 +35,20 @@ const bifurcateBy = (arr, fn) =>
     arr.reduce((acc, val, i) => (acc[fn(val, i) ? 0 : 1].push(val), acc), [[], []]);
 
 ```
+## chunk - 数组分块（变二维数组）
+
+::: tip bifurcateBy(根据fu谓词函数判断分组)
+ 利用 Array.from() 和 Array.prototype.slice()
+:::
+``` js
+/**
+ * 数组分块
+ * @param arr {Array}
+ * @param size {Number}
+ * @returns {Array}
+ */
+const ceChunk = (arr, size) =>
+    Array.from({length: Math.ceil(arr.length / size)}, (v, i) =>
+        arr.slice(i * size, i * size + size)
+    );
+```

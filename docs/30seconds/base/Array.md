@@ -1,4 +1,5 @@
 # Array
+[[toc]]
 ## all
 ::: tip all
    如果提供的谓词函数对集合中的所有元素都返回  true ，则返回  true，否则返回 false 。使用   Array.prototype.every（） 测试集合中的所有元素是否基于  fn  返回  true  。省略第二个参数  fn  ，将布尔值用作默认值。
@@ -352,3 +353,72 @@ push方法将值追加到数组中。
 push 方法有意具有通用性。该方法和 call() 或 apply() 一起使用时，可应用在类似数组的对象上。push 方法根据 length 属性来决定从哪里开始插入给定的值。如果 length 不能被转成一个数值，则插入的元素索引为 0，包括 length 不存在时。当 length 不存在时，将会创建它。
 
 唯一的原生类数组（array-like）对象是 Strings，尽管如此，它们并不适用该方法，因为字符串是不可改变的。
+
+
+## chunk
+::: tip 数组分块
+   把一个数组分块成指定大小的小数组。
+   使用 Array.from() 创建一个新的数组，它的长度就是生成 chunk(块) 的数量。 使用 Array.slice() 将新数组的每个元素映射到长度为 size 的 chunk 中。 如果原始数组不能均匀分割，最后的 chunk 将包含剩余的元素。
+:::
+
+``` js
+const chunk = (arr, size) =>
+  Array.from({ length: Math.ceil(arr.length / size) }, (v, i) =>
+    arr.slice(i * size, i * size + size)
+  );
+  
+EXAMPLES
+chunk([1, 2, 3, 4, 5], 2); // [[1,2],[3,4],[5]]
+```
+
+## compact
+::: tip 过滤掉数组中所有假值元素
+   从数组中移除 falsey 值元素。
+   使用 Array.filter() 过滤掉数组中所有 假值元素(false, null, 0, "", undefined, 和 NaN)。
+:::
+
+``` js
+const compact = arr => arr.filter(Boolean);
+  
+EXAMPLES
+compact([0, 1, false, 2, '', 3, 'a', 'e' * 23, NaN, 's', 34]); // [ 1, 2, 3, 'a', 's', 34 ]
+```
+## countBy
+::: tip 返回每个分组数组中元素的数量
+   根据给定的函数对数组的元素进行分组，并返回每个分组中元素的数量。
+   使用 Array.map() 将数组的值映射到函数或属性名称。 使用 Array.reduce() 创建一个对象，其中的键是从映射的结果中产生的。
+:::
+
+``` js
+const countBy = (arr, fn) =>
+  arr.map(typeof fn === 'function' ? fn : val => val[fn]).reduce((acc, val) => {
+    acc[val] = (acc[val] || 0) + 1;
+    return acc;
+  }, {});
+  
+EXAMPLES
+countBy([6.1, 4.2, 6.3], Math.floor); // {4: 1, 6: 2}
+countBy(['one', 'two', 'three'], 'length'); // {3: 2, 5: 1}
+```
+## countOccurrences
+::: tip 计数数组中某个值的出现次数
+   计算数组中值的出现次数。
+   每次遇到数组中的某个特定值时，使用 Array.reduce() 来递增计数器。
+:::
+
+``` js
+const countOccurrences = (arr, val) => arr.reduce((a, v) => (v === val ? a + 1 : a + 0), 0);
+EXAMPLES
+countOccurrences([1, 1, 2, 1, 2, 3], 1); // 3
+```
+## deepFlatten 
+::: tip 深度平铺数组
+  深度平铺一个数组。
+  使用递归。 通过空数组([]) 使用 Array.concat() ，结合 展开运算符( ... ) 来平铺数组。 递归平铺每个数组元素。
+:::
+
+``` js
+const deepFlatten = arr => [].concat(...arr.map(v => (Array.isArray(v) ? deepFlatten(v) : v)));
+EXAMPLES
+deepFlatten([1, [2], [[3], 4], 5]); // [1,2,3,4,5]
+```

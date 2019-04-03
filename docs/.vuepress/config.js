@@ -31,6 +31,8 @@ module.exports = {
                 items: [
                     {text: '30seconds', link: '/30seconds/base/Array'},
                     {text: 'JavaScript常用函数（ES6）', link: '/es6/fun/fun'},
+                    {text: '精读权威指南', link: '/authority/Array/define'},
+                    {text: 'JavaScript专题系列', link: '/special/special/type'},
                 ]
             },
             {text: 'Leetcode', link: '/Leetcode/javascript/leetcode'},
@@ -70,6 +72,34 @@ module.exports = {
                     collapsable: false,
                     children: [
                         'javascript/leetcode',
+                    ]
+                },
+            ],
+            '/authority/': [
+                {
+                    title: 'Array',
+                    collapsable: false,
+                    children: [
+                        'Array/define',
+                        'Array/Array',
+                        'Array/isArray',
+                        'Array/method',
+                    ]
+                },
+                {
+                    title: '函数',
+                    collapsable: false,
+                    children: [
+                        'fu/fun',
+                    ]
+                },
+            ],
+            '/special/': [
+                {
+                    title: '专题-类型判断',
+                    collapsable: false,
+                    children: [
+                        'special/type'
                     ]
                 },
             ],
