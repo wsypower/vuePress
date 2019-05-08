@@ -438,3 +438,174 @@ EXAMPLES
 
 difference([1, 2, 3], [1, 2, 4]); // [3]
 ```
+## differenceBy
+::: tip  数组比较
+  返回两个数组之间的差异。
+  
+  根据数组 b 创建一个 Set 对象，然后在数组 a 上使用 Array.filter() 方法，过滤出数组 b 中不包含的值。
+:::
+
+``` js
+const differenceBy = (a, b, fn) => {
+  const s = new Set(b.map(fn));
+  return a.map(fn).filter(el => !s.has(el));
+};
+EXAMPLES
+differenceBy([2.1, 1.2], [2.3, 3.4], Math.floor); // [1]
+differenceBy([{ x: 2 }, { x: 1 }], [{ x: 1 }], v => v.x); // [2]
+```
+## differenceWith
+::: tip  通过比较函数比较两个数组的差异
+ 过滤出数组中比较函数不返回 true 的所有值。 类似于difference ,除了接受一个 comparator （比较函数）。
+ 
+ 使用 Array.filter() 和 Array.findIndex() 来查找合适的值。
+:::
+
+``` js
+const differenceWith = (arr, val, comp) => arr.filter(a => val.findIndex(b => comp(a, b)) === -1);
+EXAMPLES
+differenceWith([1, 1.2, 1.5, 3, 0], [1.9, 3, 0], (a, b) => Math.round(a) === Math.round(b)); // [1, 1.2]
+```
+## drop
+::: tip  删除元素
+返回一个新数组，从左侧删除n个元素。
+
+使用Array.prototype.slice()从左边删除指定数量的元素。
+:::
+
+``` js
+const drop = (arr, n = 1) => arr.slice(n);
+EXAMPLES
+drop([1, 2, 3]); // [2,3]
+drop([1, 2, 3], 2); // [3]
+drop([1, 2, 3], 42); // []
+```
+## dropRight
+::: tip  从右面删除元素
+返回一个新数组，从右边删除n个元素。
+
+使用Array.prototype.slice()从右边删除指定数量的元素。
+:::
+
+``` js
+const dropRight = (arr, n = 1) => arr.slice(0, -n);
+EXAMPLES
+dropRight([1, 2, 3]); // [1,2]
+dropRight([1, 2, 3], 2); // [1]
+dropRight([1, 2, 3], 42); // []
+```
+## dropRightWhile
+::: tip  从左面删除元素
+从数组末尾移除元素，直到传递的函数返回true。返回数组中剩余的元素。
+
+循环遍历数组，使用array .prototype.slice()删除数组的最后一个元素，直到函数返回的值为true为止。返回剩余的元素。
+:::
+
+``` js
+const dropRightWhile = (arr, func) => {
+  while (arr.length > 0 && !func(arr[arr.length - 1])) arr = arr.slice(0, -1);
+  return arr;
+};
+EXAMPLES
+dropRightWhile([1, 2, 3, 4], n => n < 3); // [1, 2]
+```
+
+## dropWhile
+::: tip  移除返回false的项
+移除数组中的元素，直到传递的函数返回true。返回数组中剩余的元素。
+
+循环遍历数组，使用array .prototype.slice()删除数组的第一个元素，直到函数返回的值为true。返回剩余的元素。
+:::
+
+``` js
+const dropRightWhile = (arr, func) => {
+  while (arr.length > 0 && !func(arr[0])) arr = arr.slice(0, -1);
+  return arr;
+};
+EXAMPLES
+dropWhile([1, 2, 3, 4], n => n >= 3); // [3,4]
+```
+
+## everyNth
+::: tip  获得数组中的每个第 n 个元素
+返回数组中的每个第 n 个元素。
+
+使用 Array.filter() 创建一个包含给定数组的每个第 n 个元素的新数组。
+:::
+
+``` js
+const everyNth = (arr, nth) => arr.filter((e, i) => i % nth === nth - 1);
+EXAMPLES
+everyNth([1, 2, 3, 4, 5, 6], 2); // [ 2, 4, 6 ]
+```
+
+
+## filterFalsy
+::: tip 过滤数组中的错误值。
+过滤数组中的错误值。
+使用array .prototype.filter()获得只包含真实值的数组。
+:::
+
+``` js
+const filterFalsy = arr => arr.filter(Boolean);
+EXAMPLES
+filterFalsy(['', true, {}, false, 'sample', 1, 0]); // [true, {}, 'sample', 1]
+```
+
+## filterNonUnique 
+::: tip 过滤掉数组中的非唯一值
+过滤掉数组中的非唯一值。
+使用 Array.filter() 滤除掉非唯一值，使数组仅包含唯一值。
+:::
+
+``` js
+const filterNonUnique = arr => arr.filter(i => arr.indexOf(i) === arr.lastIndexOf(i));
+```
+## filterNonUniqueBy
+::: tip 返回数组中的唯一值
+根据提供的比较器函数过滤数组中的非惟一值。
+
+使用array .prototype.filter()和array .prototype.every()来处理只包含唯一值的数组，这是基于比较器函数fn的。comparator函数接受四个参数:正在比较的两个元素的值及其索引。
+:::
+
+``` js
+const filterNonUniqueBy = (arr, fn) =>
+  arr.filter((v, i) => arr.every((x, j) => (i === j) === fn(v, x, i, j)));
+EXAMPLES
+filterNonUniqueBy(
+  [
+    { id: 0, value: 'a' },
+    { id: 1, value: 'b' },
+    { id: 2, value: 'c' },
+    { id: 1, value: 'd' },
+    { id: 0, value: 'e' }
+  ],
+  (a, b) => a.id == b.id
+); // [ { id: 2, value: 'c' } ]
+```
+## findLast
+::: tip 提供的函数返回真(truthy)值的最后一个元素。
+返回 提供的函数返回真(truthy)值的最后一个元素。
+使用 Array.filter() 移除 fn 返回 falsey 值的元素，Array.slice(-1) 得到最后一个元素。
+:::
+
+``` js
+const findLast = (arr, fn) => arr.filter(fn).pop();
+EXAMPLES
+findLast([1, 2, 3, 4], n => n % 2 === 1); // 3
+```
+## findLastIndex
+::: tip 返回所提供函数返回真实值的最后一个元素的索引
+返回所提供函数返回真实值的最后一个元素的索引。
+使用array .prototype.map()将每个元素映射到具有其索引和值的数组。使用Array.prototype.filter()删除fn返回falsey值的元素，使用Array.prototype.pop()获取最后一个元素。
+:::
+
+``` js
+const findLastIndex = (arr, fn) =>
+  arr
+    .map((val, i) => [i, val])
+    .filter(([i, val]) => fn(val, i, arr))
+    .pop()[0];
+EXAMPLES
+findLastIndex([1, 2, 3, 4], n => n % 2 === 1); // 2 (index of the value 3)
+```

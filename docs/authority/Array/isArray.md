@@ -1,5 +1,5 @@
-# Array.isArray
-顾名思义，Array.isArray用来判断一个变量是否数组类型,我们至少有如下5种方式去判断一个值是否数组
+# 类型判断
+判断一个变量是否数组类型,我们至少有如下5种方式去判断一个值是否数组
 ``` js
 var a = [];
 // 1.基于instanceof
@@ -13,7 +13,15 @@ Object.getPrototypeOf(a) === Array.prototype;
 // 5.基于Object.prototype.toString
 Object.prototype.toString.apply(a) === '[object Array]';
 ```
-既然说到这里就简单分析一下常用的数据类型判断                             
+既然说到这里就简单分析一下常用的数据类型判断，
+js 中的类型检测也是很重要的一部分，所以说这篇文章我们就来讲一下怎么对 JavaScript 中的基本数据类型进行检测  
+
+* <font color="red">typeof  </font>
+* <font color="red">instanceof  </font>
+* <font color="red">Object.prototype.toString  </font>
+* <font color="red">construcor  </font>
+* <font color="red">getPrototypeOf </font>
+                       
 ## instanceof
 ::: tip instanceof 判断类型
   instanceof运算符用于测试构造函数的prototype属性是否出现在对象的原型链中的任何位置</br>
@@ -188,3 +196,132 @@ console.log(typeof new RegExp())  //object
 |  000       | 010 | 100 |110 |1 |0 |−2^30 |
 
 所以，typeof 在判断 null 的时候就出现问题了，由于 null 的所有机器码均为0，因此直接被当做了对象来看待。
+## Object.prototype.toString()
+所有的数据类型都可以用 Object.prototype.toString 来检测,而且非常的精准。</br>
+我们先来看一下 Object.prototype.toString 是怎么进行类型检测的
+
+``` js
+    var a = 123;
+    console.log(Object.prototype.toString.call(a));    // [object Number]
+
+    var b = "string";
+    console.log(Object.prototype.toString.call(b));    // [object String]
+
+    var c = [];
+    console.log(Object.prototype.toString.call(c));    // [object Array]
+
+    var d = {};
+    console.log(Object.prototype.toString.call(d));    // [object Object]
+
+    var e = true;
+    console.log(Object.prototype.toString.call(e));    // [object Boolean]
+
+    var f =  null;
+    console.log(Object.prototype.toString.call(f));    // [object Null]
+
+    var g;
+    console.log(Object.prototype.toString.call(g));    // [object Undefined]
+
+    var h = function () {};
+    console.log(Object.prototype.toString.call(h));    // [object Function]
+
+    var A = new Number();
+    console.log(Object.prototype.toString.call(A));    // [object Number]
+
+```
+所以说，Object.prototype.toString 还是能够比较准确的检测出对应的类型的。
+### Object.prototype.toString 的实现过程
+在 ECMAScript 5中，Object.prototype.toString() 被调用时，会进行如下步骤：
+
+* 如果 this 是 undefined ，返回 [object Undefined] ；
+* 如果 this 是 null， 返回 [object Null]；
+* 令 Object 为以 this 作为参数调用 ToObject 的结果；
+* 令 class 为 Object 的内部属性 [[Class]] 的值；
+* 返回三个字符串 [object", class, 以及"] 拼接而成的字符串。
+### [[Class]]
+[[Class]]是一个内部属性，值为一个类型字符串，可以用来判断值的类型。
+
+有这么一段详细的解释：
+>本规范的每种内置对象都定义了 [[Class]] 内部属性的值。宿主对象的 [[Class]] 内部属性的值可以是除了 "Arguments", "Array", "Boolean", "Date", "Error", "Function", "JSON", "Math", "Number", "Object", "RegExp", "String" 的任何字符串。[[Class]] 内部属性的值用于内部区分对象的种类。注，本规范中除了通过 Object.prototype.toString没有提供任何手段使程序访问此值。
+ 
+ 简单描述一下就是 toString 的调用会返回如下的格式
+
+``` js
+[object [[class]]]
+```
+看到没，通过他就可以拿到对象的内部[[class]]属性了。但这是时候有人就会说了，你瞅瞅下面的
+
+``` js
+[1,2,3].toString(); //"1, 2, 3"
+
+(new Date).toString(); //"Sat Aug 06 2011 16:29:13 GMT-0700 (PDT)"
+
+/a-z/.toString(); //"/a-z/"
+```
+
+上面现象的原因在于，大部分的内置对象都重写了 Object.prototype.toString 函数。比如Number。
+
+显然直接调用时不行的，但坏就坏在我们在用 js, 好也好在我们在用 js, 估计大家都想到了，我们还有两个方法 call 和 apply， 如下
+
+
+``` js
+Object.prototype.toString.call([1,2,3]); //"[object Array]"
+
+Object.prototype.toString.call(new Date); //"[object Date]"
+
+Object.prototype.toString.call(/a-z/); //"[object RegExp]"
+```
+## construcor,getPrototypeOf
+这两个就是应用了是用了原型链
+
+>constructor 属性返回对创建此对象的数组函数的引用。
+```
+    var a = 123;
+    console.log( a.constructor == Number);    // true
+
+    var b = "string";
+    console.log( b.constructor == String);    // true
+
+    var c = [];
+    console.log( c.constructor == Array);    // true
+
+    var d = {};
+    console.log( d.constructor == Object);    // true
+
+    var e = true;
+    console.log( e.constructor == Boolean);    // true
+
+    var f =  null;
+    console.log( f.constructor == Null);    //  TypeError: Cannot read property 'constructor' of null
+
+    var g;
+    console.log( g.constructor == Undefined);    // Uncaught TypeError: Cannot read property 'constructor' of
+    undefined
+
+    var h = function () {};
+    console.log( h.constructor == Function);    // true
+
+    var A = new Number();
+    console.log( A.constructor == Number);    // true
+
+    var A = new Number();
+
+```
+通过上述的实例，我们可以看到，无论是通过字面量或者构造函数创建的基本类型，都可以检测出。并且也可以检测出 Array、Object、Function引用类型，但是不能检测出 Null 和 Undefined
+
+
+ ## Array.isArray
+ 回到数组来说判断是不是数组就是Array.isArray（）
+
+Array.isArray([]); // true
+Array.isArray({0: 'a', length: 1}); // false
+```
+实际上，通过Object.prototype.toString去判断一个值的类型，也是各大主流库的标准。因此Array.isArray的polyfill通常长这样：
+
+``` js
+if (!Array.isArray){
+  Array.isArray = function(arg){
+    return Object.prototype.toString.call(arg) === '[object Array]';
+  };
+}
+```
