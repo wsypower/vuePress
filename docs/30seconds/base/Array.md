@@ -609,3 +609,31 @@ const findLastIndex = (arr, fn) =>
 EXAMPLES
 findLastIndex([1, 2, 3, 4], n => n % 2 === 1); // 2 (index of the value 3)
 ```
+## flatten
+::: tip 平铺数组
+将数组平铺到指定的深度。
+使用递归，为每个深度级别 depth 递减 1 。 使用 Array.reduce() 和 Array.concat() 来合并元素或数组。 基本情况下，depth 等于 1 停止递归。 省略第二个参数，depth 只能平铺到 1 (单层平铺) 的深度。
+:::
+
+``` js
+const flatten = (arr, depth = 1) =>
+  arr.reduce((a, v) => a.concat(depth > 1 && Array.isArray(v) ? flatten(v, depth - 1) : v), []);
+EXAMPLES
+flatten([1, [2], 3, 4]); // [1, 2, 3, 4]
+flatten([1, [2, [3, [4, 5], 6], 7], 8], 2); // [1, 2, 3, [4, 5], 6, 7, 8]
+```
+## forEachRight
+::: tip 
+从数组的最后一个元素开始，为每个数组元素执行一次提供的函数。
+使用 Array.slice(0) 克隆给定的数组，Array.reverse() 反转数组，Array.forEach() 遍历这个反向数组。
+:::
+
+``` js
+const forEachRight = (arr, callback) =>
+  arr
+    .slice(0)
+    .reverse()
+    .forEach(callback);
+EXAMPLES
+forEachRight([1, 2, 3, 4], val => console.log(val)); // '4', '3', '2', '1'
+```
