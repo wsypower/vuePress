@@ -1,8 +1,8 @@
 # Array
 [[toc]]
-## all
+## all - 元素是否都通过了函数的测试*
 ::: tip all
-   如果提供的谓词函数对集合中的所有元素都返回  true ，则返回  true，否则返回 false 。使用   Array.prototype.every（） 测试集合中的所有元素是否基于  fn  返回  true  。省略第二个参数  fn  ，将布尔值用作默认值。
+   如果提供的谓词函数对集合中的所有元素都返回true，则返回true，否则返回 false。使用Array.prototype.every（） 测试集合中的所有元素是否基于fn返回true。省略第二个参数fn，将布尔值用作默认值。
 :::
 
 ``` js
@@ -13,7 +13,7 @@ all([4, 2, 3], x => x > 1); // true
 all([1, 2, 3]); // true
 ```
 
-## allEqual
+## allEqual - 判断所有元素是否相等*
 ::: tip allEqual
    检查数组中的所有元素是否相等。使用 Array.prototype.every（） 检查数组中的所有元素是否与第一个元素相同。
 :::
@@ -26,7 +26,7 @@ allEqual([1, 2, 3, 4, 5, 6]); // false
 allEqual([1, 1, 1, 1]); // true
 ```
 
-### Array.prototype.every()
+#### Array.prototype.every()
 ><font color="#5291F0">[MDN 描述 Array.prototype.every()案例](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every)</font>
 
 该 every() 方法测试数组中的所有元素是否都通过了由提供的函数实现的测试。对于空数组，任何情况下调用该方法都会返回 true。
@@ -73,7 +73,7 @@ every 遍历的元素范围在第一次调用 callback 之前就已确定了。�
 
 every 和数学中的"所有"类似，当所有的元素都符合条件才返回true。另外，空数组也是返回true。(空数组中所有元素都符合给定的条件，注：因为空数组没有元素)。
 
-## any
+## any - 是否至少一个元素通过函数测试
 ::: tip any
    如果提供的谓词函数对集合中的至少一个元素返回  true  ，则返回  true   ，否则返回  false   。使用 Array.prototype.some（） 测试集合中的任何元素是否基于  fn  返回  true 。省略第二个参数  fn ，将布尔值用作默认值。
 :::
@@ -86,7 +86,7 @@ any([0, 1, 2, 0], x => x >= 2); // true
 any([0, 0, 1, 0]); // true
 ```
 
-### Array.prototype.some()
+#### Array.prototype.some()
 ><font color="#5291F0">[MDN 解析 Array.prototype.some() 案例](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/some)</font>
 
 some() 方法测试是否至少有一个元素通过由提供的函数实现的测试。
@@ -156,9 +156,12 @@ function isBiggerThan10(element, index, array) {
 [12, 5, 8, 1, 4].some(x => x > 10); // true
 ```
 
-## arrayToCSV
+## arrayToCSV - 将2D数组转换为逗号分隔值(CSV)字符串*
 ::: tip arrayToCSV
-  将二维数组转换为逗号分隔值（  csv  ）字符串。使用 Array.prototype.map () 和  Array.prototype.join（delimiter）  将一维数组组合成字符串。使用   Array.prototype.join（'\n'） （  ，换行符号）两个组合的全行到  CSV  格式的字符串，每排分捡和一个换行符。在第二  omit  参数delimiter ，使用  delimiter（默认）。
+将2D数组转换为逗号分隔值(CSV)字符串。
+使用 Array.prototype.map() 和 Array.prototype.join(delimiter) 将一个一维数组转换为字符串。
+使用 Array.prototype.join('\n') 将所有行合并成CSV字符串, 用换行符分割每一行。
+如果没有第二哥参数, delimiter会使用一个默认分隔符 ,.
 :::
 
 ``` js
@@ -173,7 +176,7 @@ arrayToCSV([['a', 'b'], ['c', 'd']], ';'); // '"a";"b"\n"c";"d"'
 arrayToCSV([['a', '"b" great'], ['c', 3.1415]]); // '"a","""b"" great"\n"c",3.1415'
 ```
 
-### Array.prototype.map()
+#### Array.prototype.map()
 ><font color="#5291F0">[MDN 解析 Array.prototype.map()案例](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/map)</font>
 
 map() 方法创建一个新数组，其结果是该数组中的每个元素都调用一个提供的函数后返回的结果。
@@ -222,7 +225,7 @@ map 不修改调用它的原数组本身（当然可以在 callback 执行时改
   =>[🥩,🍗,🍟]
 :::
 
-### Array.prototype.join()
+#### Array.prototype.join()
 ><font color="#5291F0">[MDN 解析 Array.prototype.join()案例](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/join)</font>
 
 join() 方法将一个数组（或一个类数组对象）的所有元素连接成一个字符串并返回这个字符串。如果数组只有一个项目，那么将返回该项目而不使用分隔符。
@@ -253,7 +256,7 @@ console.log(elements.join('-'));
 所有的数组元素被转换成字符串，再用一个分隔符将这些字符串连接起来。
 
 
-## bifurcate
+## bifurcate - 数据分为两组*
 ::: tip bifurcate
    将值分成两组。如果filter中的元素为true，则集合中对应的元素属于第一组;否则，它属于第二组。
    使用Array.prototype.reduce()和Array.prototype.push()根据filter向组添加元素。
@@ -267,7 +270,7 @@ EXAMPLES
 bifurcate(['beep', 'boop', 'foo', 'bar'], [true, true, false, true]); // [ ['beep', 'boop', 'bar'], ['foo'] ]
 ```
 
-## bifurcateBy
+## bifurcateBy - 数据分为两组*
 ::: tip bifurcateBy
 根据谓词函数将值分成两组，谓词函数指定输入集合中的元素属于哪一组。如果谓词函数返回一个真值，则集合元素属于第一组;否则，它属于第二组。
 使用Array.prototype.reduce()和Array.prototype.push()根据fn为每个元素返回的值向组添加元素。
@@ -280,7 +283,7 @@ const bifurcateBy = (arr, fn) =>
 EXAMPLES
 bifurcateBy(['beep', 'boop', 'foo', 'bar'], x => x[0] === 'b'); // [ ['beep', 'boop', 'bar'], ['foo'] ]
 ```
-### Array.prototype.reduce()
+#### Array.prototype.reduce()
 ><font color="#5291F0">[MDN 解析 Array.prototype.reduce()案例](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce)</font>
 
 reduce() 方法对数组中的每个元素执行一个由您提供的reducer函数(升序执行)，将其结果汇总为单个返回值。
@@ -319,7 +322,7 @@ reduce为数组中的每一个元素依次执行callback函数，不包括数组
 * array 数组
 
 回调函数第一次执行时，accumulator 和currentValue的取值有两种情况：如果调用reduce()时提供了initialValue，accumulator取值为initialValue，currentValue取数组中的第一个值；如果没有提供 initialValue，那么accumulator取数组中的第一个值，currentValue取数组中的第二个值。
-### Array.prototype.push()
+#### Array.prototype.push()
 ><font color="#5291F0">[MDN 解析 Array.prototype.push()案例](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/push)</font>
 
 reduce() 方法对数组中的每个元素执行一个由您提供的reducer函数(升序执行)，将其结果汇总为单个返回值。
@@ -355,7 +358,7 @@ push 方法有意具有通用性。该方法和 call() 或 apply() 一起使用�
 唯一的原生类数组（array-like）对象是 Strings，尽管如此，它们并不适用该方法，因为字符串是不可改变的。
 
 
-## chunk
+## chunk -数组分块*
 ::: tip 数组分块
    把一个数组分块成指定大小的小数组。
    使用 Array.from() 创建一个新的数组，它的长度就是生成 chunk(块) 的数量。 使用 Array.slice() 将新数组的每个元素映射到长度为 size 的 chunk 中。 如果原始数组不能均匀分割，最后的 chunk 将包含剩余的元素。
@@ -371,7 +374,7 @@ EXAMPLES
 chunk([1, 2, 3, 4, 5], 2); // [[1,2],[3,4],[5]]
 ```
 
-## compact
+## compact -过滤掉数组中所有假值元素*
 ::: tip 过滤掉数组中所有假值元素
    从数组中移除 falsey 值元素。
    使用 Array.filter() 过滤掉数组中所有 假值元素(false, null, 0, "", undefined, 和 NaN)。
@@ -383,7 +386,7 @@ const compact = arr => arr.filter(Boolean);
 EXAMPLES
 compact([0, 1, false, 2, '', 3, 'a', 'e' * 23, NaN, 's', 34]); // [ 1, 2, 3, 'a', 's', 34 ]
 ```
-## countBy
+## countBy -返回每个分组数组中元素的数量*
 ::: tip 返回每个分组数组中元素的数量
    根据给定的函数对数组的元素进行分组，并返回每个分组中元素的数量。
    使用 Array.map() 将数组的值映射到函数或属性名称。 使用 Array.reduce() 创建一个对象，其中的键是从映射的结果中产生的。
@@ -400,7 +403,7 @@ EXAMPLES
 countBy([6.1, 4.2, 6.3], Math.floor); // {4: 1, 6: 2}
 countBy(['one', 'two', 'three'], 'length'); // {3: 2, 5: 1}
 ```
-## countOccurrences
+## countOccurrences-计数数组中某个值的出现次数*
 ::: tip 计数数组中某个值的出现次数
    计算数组中值的出现次数。
    每次遇到数组中的某个特定值时，使用 Array.reduce() 来递增计数器。
@@ -411,7 +414,7 @@ const countOccurrences = (arr, val) => arr.reduce((a, v) => (v === val ? a + 1 :
 EXAMPLES
 countOccurrences([1, 1, 2, 1, 2, 3], 1); // 3
 ```
-## deepFlatten 
+## deepFlatten-深度平铺数组*
 ::: tip 深度平铺数组
   深度平铺一个数组。
   使用递归。 通过空数组([]) 使用 Array.concat() ，结合 展开运算符( ... ) 来平铺数组。 递归平铺每个数组元素。
@@ -422,7 +425,7 @@ const deepFlatten = arr => [].concat(...arr.map(v => (Array.isArray(v) ? deepFla
 EXAMPLES
 deepFlatten([1, [2], [[3], 4], 5]); // [1,2,3,4,5]
 ```
-## difference
+## difference-数组比较*
 ::: tip  数组比较
   返回两个数组之间的差异。
   
@@ -438,7 +441,7 @@ EXAMPLES
 
 difference([1, 2, 3], [1, 2, 4]); // [3]
 ```
-## differenceBy
+## differenceBy- 数组比较*
 ::: tip  数组比较
   返回两个数组之间的差异。
   
@@ -454,7 +457,7 @@ EXAMPLES
 differenceBy([2.1, 1.2], [2.3, 3.4], Math.floor); // [1]
 differenceBy([{ x: 2 }, { x: 1 }], [{ x: 1 }], v => v.x); // [2]
 ```
-## differenceWith
+## differenceWith- 数组比较*
 ::: tip  通过比较函数比较两个数组的差异
  过滤出数组中比较函数不返回 true 的所有值。 类似于difference ,除了接受一个 comparator （比较函数）。
  
@@ -466,7 +469,7 @@ const differenceWith = (arr, val, comp) => arr.filter(a => val.findIndex(b => co
 EXAMPLES
 differenceWith([1, 1.2, 1.5, 3, 0], [1.9, 3, 0], (a, b) => Math.round(a) === Math.round(b)); // [1, 1.2]
 ```
-## drop
+## drop-删除元素*
 ::: tip  删除元素
 返回一个新数组，从左侧删除n个元素。
 
@@ -480,7 +483,7 @@ drop([1, 2, 3]); // [2,3]
 drop([1, 2, 3], 2); // [3]
 drop([1, 2, 3], 42); // []
 ```
-## dropRight
+## dropRight-从右面删除元素*
 ::: tip  从右面删除元素
 返回一个新数组，从右边删除n个元素。
 
@@ -494,7 +497,7 @@ dropRight([1, 2, 3]); // [1,2]
 dropRight([1, 2, 3], 2); // [1]
 dropRight([1, 2, 3], 42); // []
 ```
-## dropRightWhile
+## dropRightWhile-从左面删除元素*
 ::: tip  从左面删除元素
 从数组末尾移除元素，直到传递的函数返回true。返回数组中剩余的元素。
 
@@ -510,7 +513,7 @@ EXAMPLES
 dropRightWhile([1, 2, 3, 4], n => n < 3); // [1, 2]
 ```
 
-## dropWhile
+## dropWhile-移除返回false的项*
 ::: tip  移除返回false的项
 移除数组中的元素，直到传递的函数返回true。返回数组中剩余的元素。
 
@@ -519,14 +522,14 @@ dropRightWhile([1, 2, 3, 4], n => n < 3); // [1, 2]
 
 ``` js
 const dropRightWhile = (arr, func) => {
-  while (arr.length > 0 && !func(arr[0])) arr = arr.slice(0, -1);
+  while (arr.length > 0 && !func(arr[0])) arr = arr.slice(1);
   return arr;
 };
 EXAMPLES
 dropWhile([1, 2, 3, 4], n => n >= 3); // [3,4]
 ```
 
-## everyNth
+## everyNth-获得数组中的每个第 n 个元素*
 ::: tip  获得数组中的每个第 n 个元素
 返回数组中的每个第 n 个元素。
 
@@ -540,7 +543,7 @@ everyNth([1, 2, 3, 4, 5, 6], 2); // [ 2, 4, 6 ]
 ```
 
 
-## filterFalsy
+## filterFalsy-过滤数组中的错误值*
 ::: tip 过滤数组中的错误值。
 过滤数组中的错误值。
 使用array .prototype.filter()获得只包含真实值的数组。
@@ -552,7 +555,7 @@ EXAMPLES
 filterFalsy(['', true, {}, false, 'sample', 1, 0]); // [true, {}, 'sample', 1]
 ```
 
-## filterNonUnique 
+## filterNonUnique -过滤掉数组中的非唯一值*
 ::: tip 过滤掉数组中的非唯一值
 过滤掉数组中的非唯一值。
 使用 Array.filter() 滤除掉非唯一值，使数组仅包含唯一值。
@@ -561,7 +564,7 @@ filterFalsy(['', true, {}, false, 'sample', 1, 0]); // [true, {}, 'sample', 1]
 ``` js
 const filterNonUnique = arr => arr.filter(i => arr.indexOf(i) === arr.lastIndexOf(i));
 ```
-## filterNonUniqueBy
+## filterNonUniqueBy-返回数组中的唯一值*
 ::: tip 返回数组中的唯一值
 根据提供的比较器函数过滤数组中的非惟一值。
 
@@ -583,7 +586,7 @@ filterNonUniqueBy(
   (a, b) => a.id == b.id
 ); // [ { id: 2, value: 'c' } ]
 ```
-## findLast
+## findLast-提供的函数返回真(truthy)值的最后一个元素
 ::: tip 提供的函数返回真(truthy)值的最后一个元素。
 返回 提供的函数返回真(truthy)值的最后一个元素。
 使用 Array.filter() 移除 fn 返回 falsey 值的元素，Array.slice(-1) 得到最后一个元素。
@@ -594,7 +597,7 @@ const findLast = (arr, fn) => arr.filter(fn).pop();
 EXAMPLES
 findLast([1, 2, 3, 4], n => n % 2 === 1); // 3
 ```
-## findLastIndex
+## findLastIndex-返回所提供函数返回真实值的最后一个元素的索引
 ::: tip 返回所提供函数返回真实值的最后一个元素的索引
 返回所提供函数返回真实值的最后一个元素的索引。
 使用array .prototype.map()将每个元素映射到具有其索引和值的数组。使用Array.prototype.filter()删除fn返回falsey值的元素，使用Array.prototype.pop()获取最后一个元素。
@@ -609,7 +612,7 @@ const findLastIndex = (arr, fn) =>
 EXAMPLES
 findLastIndex([1, 2, 3, 4], n => n % 2 === 1); // 2 (index of the value 3)
 ```
-## flatten
+## flatten-平铺数组
 ::: tip 平铺数组
 将数组平铺到指定的深度。
 使用递归，为每个深度级别 depth 递减 1 。 使用 Array.reduce() 和 Array.concat() 来合并元素或数组。 基本情况下，depth 等于 1 停止递归。 省略第二个参数，depth 只能平铺到 1 (单层平铺) 的深度。
@@ -622,7 +625,7 @@ EXAMPLES
 flatten([1, [2], 3, 4]); // [1, 2, 3, 4]
 flatten([1, [2, [3, [4, 5], 6], 7], 8], 2); // [1, 2, 3, [4, 5], 6, 7, 8]
 ```
-## forEachRight
+## forEachRight-从右为每个数组元素执行一次提供的函数
 ::: tip 
 从数组的最后一个元素开始，为每个数组元素执行一次提供的函数。
 使用 Array.slice(0) 克隆给定的数组，Array.reverse() 反转数组，Array.forEach() 遍历这个反向数组。
@@ -636,4 +639,114 @@ const forEachRight = (arr, callback) =>
     .forEach(callback);
 EXAMPLES
 forEachRight([1, 2, 3, 4], val => console.log(val)); // '4', '3', '2', '1'
+```
+## groupBy - 数组分组
+::: tip 
+根据给定的函数对数组元素进行分组。
+使用 Array.map() 将数组的值映射到函数或属性名称。使用 Array.reduce() 来创建一个对象，其中的 key 是从映射结果中产生。
+:::
+
+``` js
+const groupBy = (arr, fn) =>
+  arr.map(typeof fn === 'function' ? fn : val => val[fn]).reduce((acc, val, i) => {
+    acc[val] = (acc[val] || []).concat(arr[i]);
+    return acc;
+  }, {});
+  
+EXAMPLES
+
+groupBy([6.1, 4.2, 6.3], Math.floor); // {4: [4.2], 6: [6.1, 6.3]}
+groupBy(['one', 'two', 'three'], 'length'); // {3: ['one', 'two'], 5: ['three']}
+```
+
+## head - 返回数组的第一个元素
+::: tip  返回数组的第一个元素
+返回数组的第一个元素。
+使用 arr[0] 返回传递数组的第一个元素。
+:::
+
+``` js
+const head = arr => arr[0];
+
+EXAMPLES
+head([1, 2, 3]); // 1
+```
+
+## indexOfAll - 返回指定元素的所有索引
+::: tip 返回指定元素的所有索引
+返回数组中所有 val 的索引。 如果 val 从不出现，则返回 [] 。
+使用 Array.forEach() 循环元素和 Array.push() 来存储匹配元素的索引。 返回索引数组。
+:::
+
+``` js
+const indexOfAll = (arr, val) => arr.reduce((acc, el, i) => (el === val ? [...acc, i] : acc), []);
+EXAMPLES
+indexOfAll([1, 2, 3, 1, 2, 3], 1); // [0,3]
+indexOfAll([1, 2, 3], 4); // []
+```
+## initial - 排除数组中最后一个元素
+::: tip 排除数组中最后一个元素
+返回一个数组中除了最后一个元素以外的所有元素。
+使用 arr.slice(0,-1) 返回排除了最后一个元素的数组。
+:::
+
+``` js
+const initial = arr => arr.slice(0, -1);
+EXAMPLES
+initial([1, 2, 3]); // [1,2]
+```
+## initialize2DArray - 初始化一个二维数组
+::: tip 初始化一个二维数组
+初始化一个给定行数和列数，及值的二维数组。
+使用 Array.map() 生成 h 行，其中每个行都是一个长度为 w 的新数组。 如果未提供值 val ，则默认为 null。
+:::
+
+``` js
+const initialize2DArray = (w, h, val = null) =>
+  Array.from({ length: h }).map(() => Array.from({ length: w }).fill(val));
+EXAMPLES
+initialize2DArray(2, 2, 0); // [[0,0], [0,0]]
+```
+
+## initializeArrayWithRange - 初始化特定范围的数字数组
+::: tip 初始化一个二维数组
+初始化一个给定行数和列数，及值的二维数组。
+使用 Array.map() 生成 h 行，其中每个行都是一个长度为 w 的新数组。 如果未提供值 val ，则默认为 null。
+:::
+
+``` js
+const initializeArrayWithRange = (end, start = 0, step = 1) =>
+  Array.from({ length: Math.ceil((end - start + 1) / step) }, (v, i) => i * step + start);
+EXAMPLES
+initializeArrayWithRange(5); // [0,1,2,3,4,5]
+initializeArrayWithRange(7, 3); // [3,4,5,6,7]
+initializeArrayWithRange(9, 0, 2); // [0,2,4,6,8]
+```
+
+## initializeArrayWithValues - 初始化特定范围和值的数组
+::: tip 初始化特定范围和值的数组
+使用指定的值初始化和填充数组。
+使用 Array(n) 创建所需长度的数组，使用 fill(v) 以填充所需的值。 你可以忽略 val ，使用默认值 0。
+:::
+
+``` js
+const initializeArrayWithValues = (n, val = 0) => Array(n).fill(val);
+EXAMPLES
+initializeArrayWithValues(5, 2); // [2, 2, 2, 2, 2]
+```
+
+## initializeNDArray - 建一个具有给定值的n维数组
+::: tip 初始化特定范围和值的数组
+创建一个具有给定值的n维数组。
+使用递归。使用array .prototype.map()生成行，其中每个行都是使用initializeNDArray初始化的新数组。
+:::
+
+``` js
+const initializeNDArray = (val, ...args) =>
+  args.length === 0
+    ? val
+    : Array.from({ length: args[0] }).map(() => initializeNDArray(val, ...args.slice(1)));
+EXAMPLES
+initializeNDArray(1, 3); // [1,1,1]
+initializeNDArray(5, 2, 2, 2); // [[[5,5],[5,5]],[[5,5],[5,5]]]
 ```
